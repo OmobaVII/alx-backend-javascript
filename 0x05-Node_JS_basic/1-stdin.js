@@ -8,7 +8,7 @@ const read = readline.createInterface({
 process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
 read.on('line', (input) => {
-  process.stdout.write(`Your name is: ${input}\n`);
+  console.log(`Your name is: ${input}`);
 });
 read.on('close', () => {
   process.stdout.write('This important software is now closing\n');
