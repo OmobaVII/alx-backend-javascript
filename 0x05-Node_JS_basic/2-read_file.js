@@ -6,11 +6,11 @@ function countStudents(path) {
   let count = 0;
   try {
     const content = fs.readFileSync(path, 'utf-8');
-    const line = content.toString().split('\n');
+    const line = content.trim().split('\n');
     for (let a = 0; a < line.length; a += 1) {
       if (line[a]) {
         count += 1;
-        const fieldStudents = line[a].toString().split(',');
+        const fieldStudents = line[a].trim().split(',');
         if (Object.prototype.hasOwnProperty.call(students, fieldStudents[3])) {
           students[fieldStudents[3]].push(fieldStudents[0]);
         } else {
@@ -33,8 +33,8 @@ function countStudents(path) {
         console.log(`Number of students in ${k}: ${v}. List: ${students[k].join(', ')}`);
       }
     }
-  } catch (err) {
-    console.error('Cannot load the database');
+  } catch (error) {
+    throw Error('Cannot load the database');
   }
 }
 
