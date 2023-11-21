@@ -6,11 +6,11 @@ function countStudents(path) {
   let count = 0;
   try {
     const content = fs.readFileSync(path, 'utf-8');
-    const line = content.trim().split('\n');
+    const line = content.toString().split('\n');
     for (let a = 0; a < line.length; a += 1) {
       if (line[a]) {
         count += 1;
-        const fieldStudents = line[a].trim().split(',');
+        const fieldStudents = line[a].toString().split(',');
         if (Object.prototype.hasOwnProperty.call(students, fieldStudents[3])) {
           students[fieldStudents[3]].push(fieldStudents[0]);
         } else {
