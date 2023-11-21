@@ -9,9 +9,9 @@ function countStudents(path) {
       if (error) {
         reject(Error('Cannot load the database'));
       } else {
-    	const line = content.toString().split('\n');
-    	for (let a = 0; a < line.length; a += 1) {
-      	  if (line[a]) {
+        const line = content.toString().split('\n');
+        for (let a = 0; a < line.length; a += 1) {
+          if (line[a]) {
             count += 1;
             const fieldStudents = line[a].toString().split(',');
             if (Object.prototype.hasOwnProperty.call(students, fieldStudents[3])) {
