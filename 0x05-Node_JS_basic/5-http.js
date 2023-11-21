@@ -1,8 +1,4 @@
-const http = require('http');
 const fs = require('fs');
-
-const host = '127.0.0.1';
-const port = 1245;
 
 function countStudents(path) {
   const students = {};
@@ -11,8 +7,9 @@ function countStudents(path) {
   return new Promise((accept, reject) => {
     fs.readFile(path, (error, content) => {
       if (error) {
-        reject(Error('Cannot load the database'));
+        reject(error);
       } else {
+        let display = '';
         const line = content.toString().split('\n');
         for (let a = 0; a < line.length; a += 1) {
           if (line[a]) {
@@ -33,18 +30,24 @@ function countStudents(path) {
 
         const c = count - 1;
 
-        console.log(`Number of students: ${c}`);
+        display += `Number of students: ${c}\n`;
 
         for (const [k, v] of Object.entries(fields)) {
           if (k !== 'field') {
-            console.log(`Number of students in ${k}: ${v}. List: ${students[k].join(', ')}`);
+            display += `Number of students in ${k}: ${v}. `;
+            display += `List: ${students[k].join(', ')}\n`;
           }
         }
-        accept(content);
+        accept(display);
       }
     });
   });
 }
+
+const http = require('http');
+
+const host = '127.0.0.1';
+const port = 1245;
 
 const app = http.createServer((req, res) => {
   res.statusCode = 200;
@@ -55,9 +58,9 @@ const app = http.createServer((req, res) => {
   }
   if (req.url === '/students') {
     res.write('This is the list of our students\n');
-    countStudents(process.argv[2]).then((output) => {
-      const display = output.slice(0, -1);
-      res.end(display);
+    countStudents(process.argv[2]).then((display) => {
+      const output = display.slice(0, -1);
+      res.end(output);
     }).catch(() => {
       res.statusCode = 404;
       res.end('Cannot load the database');
