@@ -11,3 +11,5 @@ const app = http.createServer((request, response) => {
 
 app.listen(port, host, () => {
 });
+
+module.exports = app;
