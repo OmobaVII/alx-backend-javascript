@@ -11,7 +11,7 @@ class StudentsController {
         display.push(`Number of students in ${k[a]}: ${students[k[a]].length}. List: ${students[k[a]].join(', ')}`);
       }
       res.status(200).send(display.join('\n'));
-    }).catch((err) => {
+    }).catch(() => {
       res.status(500).send('Cannot load the database');
     });
   }
@@ -20,7 +20,7 @@ class StudentsController {
     const field = req.params.major;
     readDatabase(process.argv[2].toString()).then((students) => {
       if (!(field in students)) {
-      	res.status(500).send('Major parameter must be CS or SWE');
+        res.status(500).send('Major parameter must be CS or SWE');
       } else {
         res.status(200).send(`List: ${students[field].join(', ')}`);
       }

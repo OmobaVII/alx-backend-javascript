@@ -17,8 +17,8 @@ module.exports = function readDatabase(path) {
             } else {
               students[fieldStudents[3]] = [fieldStudents[0]];
             }
-	  }
-	}
+          }
+        }
         accept(students);
       }
     });
