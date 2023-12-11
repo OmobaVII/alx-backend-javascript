@@ -1,23 +1,23 @@
-/// <reference path="./crud.d.ts" />
-import { RowID, RowElement } from './interface';
-import * as CRUD from './crud';
-
-const row: RowElement = {
-  firstName: 'Guillaume',
-  lastName: 'Salva',
+export const cpp: Subjects.Cpp = new Subjects.Cpp();
+export const java: Subjects.Java = new Subjects.Java();
+export const react: Subjects.React = new Subjects.React();
+export const cTeacher: Subjects.Teacher = {
+  firstName: 'Dennis',
+  lastName: 'Ritchie',
+  experienceTeachingC: 10,
 };
-const newRowID: RowID = CRUD.insertRow(row);
-const updatedRow: RowElement = {...row, age: 23};
-CRUD.updateRow(newRowID, updatedRow);
-CRUD.deleteRow(newRowID);
 
-const obj = {firstName: "Guillaume", lastName: "Salva"};
-CRUD.insertRow(obj)
-// Insert row {firstName: "Guillaume", lastName: "Salva"}
+console.log('C++');
+cpp.setTeacher = cTeacher;
+console.log(cpp.getRequirements());
+console.log(cpp.getAvailableTeacher());
 
-const updatedRow1: RowElement = { firstName: "Guillaume", lastName: "Salva", age: 23 };
-CRUD.updateRow(newRowID, updatedRow1);
-// Update row 125 {firstName: "Guillaume", lastName: "Salva", age: 23}
+console.log('Java');
+java.setTeacher = cTeacher;
+console.log(java.getRequirements());
+console.log(java.getAvailableTeacher());
 
-CRUD.deleteRow(125);
-// Delete row id 125
+console.log('React');
+react.setTeacher = cTeacher;
+console.log(react.getRequirements());
+console.log(react.getAvailableTeacher());
